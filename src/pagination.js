@@ -3,7 +3,6 @@ var PaginationContainerLeft = React.createClass({
    return {isVisible : (this.props.skip > 0 ? true : false)};
   }
 , render : function() {
-
   var optionalHyperlink = function (isVisible) {
     if (isVisible)
       return (<a href="#">&lt; Previous</a>);
@@ -21,16 +20,16 @@ var PaginationContainerLeft = React.createClass({
 
 var Pagination = React.createClass({
   getInitialState: function() {
-   return {data : this.props.config};
+   return {data : this.props.skip};
   }
 , render : function (){
     return (
-      <p>HELLdddO1321</p>
+      <PaginationContainerLeft skip={this.props.skip}/>
     )
   }
 });
 
 React.render(
-  <Pagination  config="{skip:0,limit:30,numResults:200}"/>,
+  <Pagination  skip={1} limit={30} numResults={200}/>,
   document.getElementById('pagination')
 );
