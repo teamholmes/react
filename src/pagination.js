@@ -20,16 +20,22 @@ var PaginationContainerLeft = React.createClass({
 
 var Pagination = React.createClass({
   getInitialState: function() {
-   return {data : this.props.skip};
+   return {configuration : this.props.config};
   }
 , render : function (){
     return (
-      <PaginationContainerLeft skip={this.props.skip}/>
+      <PaginationContainerLeft skip={this.state.configuration.skip}/>
     )
   }
 });
 
+var myData = {
+  skip : 0
+, limit : 30
+, numResults : 2000
+};
+
 React.render(
-  <Pagination  skip={1} limit={30} numResults={200}/>,
+  <Pagination  config={myData}/>,
   document.getElementById('pagination')
 );
