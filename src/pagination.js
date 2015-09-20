@@ -1,29 +1,36 @@
-// var CommentBox = React.createClass({
-//   render: function() {
-//     return (
-//       <div className="commentBox">
-//         Hello, world! I am a CommentBox.
-//       </div>
-//     );
-//   }
-// });
-
 var PaginationContainerLeft = React.createClass({
   getInitialState: function() {
    return {isVisible : (this.props.skip > 0 ? true : false)};
   }
 , render : function() {
-    var linkTag = (this.state.isVisible ? '<a href="#">&lt; Previous</a>' : '');
+
+  var optionalHyperlink = function (isVisible) {
+    if (isVisible)
+      return (<a href="#">&lt; Previous</a>);
+      return;
+    }
+
     return (
       <div className="container-left">
-        {linkTag}
-        <a href="#">&lt; Previous</a>
+      <p>Pagination here </p>
+        {optionalHyperlink(this.state.isVisible)}
       </div>
     );
   }
 });
 
+var Pagination = React.createClass({
+  getInitialState: function() {
+   return {data : this.props.config};
+  }
+, render : function (){
+    return (
+      <p>HELLdddO1321</p>
+    )
+  }
+});
+
 React.render(
-  <PaginationContainerLeft skip="1"/>,
+  <Pagination  config="{skip:0,limit:30,numResults:200}"/>,
   document.getElementById('pagination')
 );
