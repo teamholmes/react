@@ -1,3 +1,11 @@
+var myData = {
+  skip : 2
+, limit : 30
+, numResults : 95
+};
+
+//////////// PAGINATIONLEFTCONTAINER COMPONENT
+
 var PaginationContainerLeft = React.createClass({
   getInitialState: function() {
    return {isVisible : (this.props.skip > 0 ? true : false)};
@@ -8,15 +16,35 @@ var PaginationContainerLeft = React.createClass({
       return (<a href="#">&lt; Previous</a>);
       return;
     }
-
     return (
       <div className="container-left">
-      <p>Pagination here </p>
         {optionalHyperlink(this.state.isVisible)}
       </div>
     );
   }
 });
+
+
+////////////// PAGINATIONRIGHTCONTAINER COMPONENT
+var PaginationContainerRight = React.createClass({
+  getInitialState: function() {
+   return {isVisible : (this.props.config.numResults - (this.props.config.skip * this.props.config.limit) > this.props.config.limit ? true : false)};
+  }
+, render : function() {
+  var optionalHyperlink = function (isVisible) {
+    if (isVisible)
+      return (<a href="#">Next &gt;</a>);
+      return;
+    }
+    return (
+      <div className="container-left">
+        {optionalHyperlink(this.state.isVisible)}
+      </div>
+    );
+  }
+});
+
+////////////// PAGINATION COMPONENT
 
 var Pagination = React.createClass({
   getInitialState: function() {
@@ -24,18 +52,16 @@ var Pagination = React.createClass({
   }
 , render : function (){
     return (
-      <PaginationContainerLeft skip={this.state.configuration.skip}/>
+      <div id="container-pager">
+        <PaginationContainerLeft skip={this.state.configuration.skip}/>
+        <PaginationContainerRight config={this.state.configuration} />
+    </div>
     )
   }
 });
 
-var myData = {
-  skip : 0
-, limit : 30
-, numResults : 2000
-};
 
 React.render(
-  <Pagination  config={myData}/>,
+  <Pagination config={myData}/>,
   document.getElementById('pagination')
 );
